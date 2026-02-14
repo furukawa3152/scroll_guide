@@ -36,17 +36,77 @@
             background: #f5f7fa;
             min-height: 100vh;
             padding: 20px;
+            position: relative;
+        }
+        
+        .wrapper {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            gap: 30px;
+            align-items: flex-start;
         }
         
         .container {
+            flex: 1;
             max-width: 900px;
-            margin: 0 auto;
             background: white;
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             padding: 40px;
             margin-top: 20px;
             margin-bottom: 20px;
+        }
+        
+        .sidebar {
+            position: sticky;
+            top: 20px;
+            width: 250px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            padding: 20px;
+            max-height: calc(100vh - 40px);
+            overflow-y: auto;
+        }
+        
+        .sidebar h3 {
+            color: #2c3e50;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e8f4f8;
+        }
+        
+        .toc {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .toc li {
+            margin-bottom: 8px;
+        }
+        
+        .toc a {
+            display: block;
+            color: #555;
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: all 0.3s;
+            font-size: 0.9em;
+        }
+        
+        .toc a:hover {
+            background: #e8f4f8;
+            color: #2c3e50;
+        }
+        
+        .toc a.active {
+            background: #2c3e50;
+            color: white;
+            font-weight: bold;
         }
         
         .header {
@@ -259,6 +319,16 @@
             margin-top: 0;
         }
         
+        @media (max-width: 1200px) {
+            .sidebar {
+                display: none;
+            }
+            
+            .wrapper {
+                flex-direction: column;
+            }
+        }
+        
         @media (max-width: 768px) {
             .container {
                 padding: 20px;
@@ -306,7 +376,8 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="wrapper">
+        <div class="container">
         <div class="header">
             <div class="header-left">
                 <img src="images/scroll_logo.png" alt="Scroll Logo" class="logo-img">
@@ -331,7 +402,14 @@
             <p>みんなで一緒に盛り上げていきましょう！</p>
         </div>
         
-        <h2>
+        <div class="note" style="margin-top: 30px; margin-bottom: 30px;">
+            <p><strong>📊 ブログカウンター</strong></p>
+            <p>目標達成の進捗をリアルタイムで確認できるブログカウンターページがあります！</p>
+            <p>現在のブログ数やライター数、目標達成率をチェックして、みんなで盛り上げていきましょう！</p>
+            <a href="https://blogcounter.hagakurepgm.net/" target="_blank" rel="noopener noreferrer" class="link-button" style="margin-top: 15px;">ブログカウンターを見る</a>
+        </div>
+        
+        <h2 id="section-start">
             <img src="images/voice-samurai.png" alt="侍" class="section-character">
              はじめに
         </h2>
@@ -359,7 +437,7 @@
             <img src="images/blog_ui.png" alt="ブログ作成画面" class="step-image">
         </div>
         
-        <h2>
+        <h2 id="section-writing">
             <img src="images/voice-ninja1.png" alt="忍者1" class="section-character">
             記事の書き方
         </h2>
@@ -390,7 +468,70 @@
 
 ![画像の説明](画像URL)</code></pre>
         
-        <h2>
+        <h2 id="section-tags">🏷️ タグの付け方</h2>
+        <p>タグは記事の内容に関連するものを3〜5個程度付けましょう。例：</p>
+        <ul>
+            <li><code>Python</code>、<code>JavaScript</code>（技術系）</li>
+            <li><code>AI</code>、<code>LLM</code>（トピック系）</li>
+            <li><code>作ってみた</code>、<code>使ってみた</code>（カテゴリ系）</li>
+            <li><code>初心者</code>、<code>Tips</code>（難易度・種類系）</li>
+        </ul>
+        
+        <div class="note">
+            <strong>💡 ヒント</strong>：既存の記事のタグを参考にすると、統一感が出ます！
+        </div>
+        
+        <h2 id="section-images">🖼️ 画像、コードブロックの追加方法</h2>
+        <div class="step">
+            <strong>➕ボタンから画像、コードブロブロックを選択。</strong>
+            <p>マークダウンのコードブロックでは崩れることがあるので、専用ブロックを使用してください。</p>
+        </div>
+        
+        
+        <img src="images/block.png" alt="ブロック追加メニュー" class="step-image" style="margin-top: 20px;">
+        
+        <h2 id="section-publish">📤 公開方法</h2>
+        <div class="step">
+            <span class="step-number">1</span>
+            <strong>下書き保存</strong>
+            <p>「下書き保存」で途中まで保存できます。<br>一度下書きを保存したら、AIレビューボタンを押すことで公開前でもHAGAKURE君のレビューが受けられます。</p>
+            <img src="images/AIbutton.png" alt="AIレビューボタン" class="step-image" style="margin-top: 15px;">
+        </div>
+        
+        <div class="step">
+            <span class="step-number">2</span>
+            <strong>公開</strong>
+            <p>「公開」ボタンを押すと、記事が公開されます！</p>
+        </div>
+        
+        <div class="note">
+            <strong>⚠️ 注意</strong>：公開後も編集・削除は可能です。気軽に投稿してください！
+        </div>
+        
+        <h2 id="section-faq">❓ よくある質問</h2>
+        
+        <h3>Q: 技術的な内容でないとダメですか？</h3>
+        <p><strong>A:</strong> いいえ！何でも書いてOKです。おすすめスポット、食べ物、日常の気づきなど、自由に投稿してください。</p>
+        
+        <h3>Q: 短い記事でも大丈夫ですか？</h3>
+        <p><strong>A:</strong> はい！短い記事でも全く問題ありません。気軽に投稿してください。</p>
+        
+        <h3>Q: 下書きは保存できますか？</h3>
+        <p><strong>A:</strong> はい、「下書き保存」機能で途中まで保存できます。</p>
+        
+        <h3>Q: タグは何個付ければいいですか？</h3>
+        <p><strong>A:</strong> ４個までつけられます。少なすぎても検索性が下がるので、適度に付けましょう。</p>
+        
+        <h2 id="section-links">🔗 リンク</h2>
+        <a href="https://hagakurepgm.net/blog/" class="link-button">Scrollブログサイトへ</a>
+        
+        <div class="note" style="margin-top: 40px;">
+            <p><strong>💬 困ったことがあれば</strong></p>
+            <p>Slackの「#Web開発」チャンネル等で気軽に質問してください！</p>
+            <p>みんなで助け合いながら、楽しくブログを書いていきましょう！</p>
+        </div>
+        
+        <h2 id="section-templates">
             <img src="images/voice-ninja2.png" alt="忍者2" class="section-character">
             テンプレート集
         </h2>
@@ -446,74 +587,71 @@
 一言でまとめると</code></pre>
         </div>
         
-        <h2>🏷️ タグの付け方</h2>
-        <p>タグは記事の内容に関連するものを3〜5個程度付けましょう。例：</p>
-        <ul>
-            <li><code>Python</code>、<code>JavaScript</code>（技術系）</li>
-            <li><code>AI</code>、<code>LLM</code>（トピック系）</li>
-            <li><code>作ってみた</code>、<code>使ってみた</code>（カテゴリ系）</li>
-            <li><code>初心者</code>、<code>Tips</code>（難易度・種類系）</li>
-        </ul>
-        
-        <div class="note">
-            <strong>💡 ヒント</strong>：既存の記事のタグを参考にすると、統一感が出ます！
-        </div>
-        
-        <h2>🖼️ 画像、コードブロックの追加方法</h2>
-        <div class="step">
-            <strong>➕ボタンから画像、コードブロブロックを選択。</strong>
-            <p>マークダウンのコードブロックでは崩れることがあるので、専用ブロックを使用してください。</p>
-        </div>
-        
-        
-        <img src="images/block.png" alt="ブロック追加メニュー" class="step-image" style="margin-top: 20px;">
-        
-        <h2>📤 公開方法</h2>
-        <div class="step">
-            <span class="step-number">1</span>
-            <strong>下書き保存</strong>
-            <p>「下書き保存」で途中まで保存できます。<br>一度下書きを保存したら、AIレビューボタンを押すことで公開前でもHAGAKURE君のレビューが受けられます。</p>
-            <img src="images/AIbutton.png" alt="AIレビューボタン" class="step-image" style="margin-top: 15px;">
-        </div>
-        
-        <div class="step">
-            <span class="step-number">2</span>
-            <strong>公開</strong>
-            <p>「公開」ボタンを押すと、記事が公開されます！</p>
-        </div>
-        
-        <div class="note">
-            <strong>⚠️ 注意</strong>：公開後も編集・削除は可能です。気軽に投稿してください！
-        </div>
-        
-        <h2>❓ よくある質問</h2>
-        
-        <h3>Q: 技術的な内容でないとダメですか？</h3>
-        <p><strong>A:</strong> いいえ！何でも書いてOKです。おすすめスポット、食べ物、日常の気づきなど、自由に投稿してください。</p>
-        
-        <h3>Q: 短い記事でも大丈夫ですか？</h3>
-        <p><strong>A:</strong> はい！短い記事でも全く問題ありません。気軽に投稿してください。</p>
-        
-        <h3>Q: 下書きは保存できますか？</h3>
-        <p><strong>A:</strong> はい、「下書き保存」機能で途中まで保存できます。</p>
-        
-        <h3>Q: タグは何個付ければいいですか？</h3>
-        <p><strong>A:</strong> ４個までつけられます。少なすぎても検索性が下がるので、適度に付けましょう。</p>
-        
-        <h2>🔗 リンク</h2>
-        <a href="https://hagakurepgm.net/blog/" class="link-button">Scrollブログサイトへ</a>
-        
-        <div class="note" style="margin-top: 40px;">
-            <p><strong>💬 困ったことがあれば</strong></p>
-            <p>Slackの「#Web開発」チャンネル等で気軽に質問してください！</p>
-            <p>みんなで助け合いながら、楽しくブログを書いていきましょう！</p>
-        </div>
-        
         <hr style="margin: 40px 0; border: none; border-top: 2px solid #eee;">
         
         <p style="text-align: center; color: #999; font-size: 0.9em;">
             © HAGAKUREプログラミング塾 | Scroll 書き方ガイド
         </p>
     </div>
+    
+    <aside class="sidebar">
+        <h3>📑 目次</h3>
+        <ul class="toc">
+            <li><a href="#section-start">はじめに</a></li>
+            <li><a href="#section-writing">記事の書き方</a></li>
+            <li><a href="#section-tags">タグの付け方</a></li>
+            <li><a href="#section-images">画像・コードブロック</a></li>
+            <li><a href="#section-publish">公開方法</a></li>
+            <li><a href="#section-faq">よくある質問</a></li>
+            <li><a href="#section-links">リンク</a></li>
+            <li><a href="#section-templates">テンプレート集</a></li>
+        </ul>
+    </aside>
+    </div>
+    
+    <script>
+        // スムーズスクロール
+        document.querySelectorAll('.toc a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    const offsetTop = targetElement.offsetTop - 20;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // スクロール位置に応じてアクティブなセクションをハイライト
+        const sections = document.querySelectorAll('h2[id]');
+        const tocLinks = document.querySelectorAll('.toc a');
+        
+        function updateActiveSection() {
+            let current = '';
+            const scrollPosition = window.pageYOffset + 150;
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', updateActiveSection);
+        window.addEventListener('load', updateActiveSection);
+    </script>
 </body>
 </html>
